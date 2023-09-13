@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  vars: 
+    nvimConfigSrc: "./files/nvim"
+    nvimConfigDest: "~/.config/nvim"
+
+  tasks:
+    - name: apt update
+      apt:
+        update_cache: yes
+
+    - name: install packages
+      package:
+          name:
+            - zsh
+            - tmux
+            - bun
+
+    - name: snap install nvim --classic
+      community.general.snap:
+        name: 'nvim'
+        classic: yes
+
+    - name: symlink configs
+      ansible.builtin.file:
+         src: "{{ nvimConfigSrc }}"
+         dest: "{{ nvimConfigDest }}"
+         state: link
