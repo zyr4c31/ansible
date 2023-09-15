@@ -2,13 +2,14 @@
 - hosts: localhost
   connection: local
   become: true
-  ansible.builtin.sudo:
-    become_exe: sudo
   vars: 
-    nvimConfigSrc: "./files/nvim"
+    nvimConfigSrc: "/files/nvim"
     nvimConfigDest: "~/.config/nvim"
 
   tasks:
+    - name: debug
+      debug: var={{ $HOME }}
+    
     - name: apt update
       apt:
         update_cache: yes
@@ -18,7 +19,6 @@
           name:
             - zsh
             - tmux
-            - bun
 
     - name: snap install nvim --classic
       community.general.snap:
@@ -32,3 +32,4 @@
          state: link
          owner: root
          group: root
+         force: yes
