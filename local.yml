@@ -3,13 +3,12 @@
   connection: local
   become: true
   vars: 
-    nvimConfigSrc: "/files/nvim"
-    nvimConfigDest: "~/.config/nvim"
+    homeDir: "/home/zyr"
+    testDir: "{{ homeDir }}/.config/nvim"
+    nvimConfigSrc: "/home/zyr/personal/ansible/files/nvim"
+    nvimConfigDest: "/home/zyr/.config/nvim"
 
   tasks:
-    - name: debug
-      debug: var={{ $HOME }}
-    
     - name: apt update
       apt:
         update_cache: yes
@@ -19,6 +18,7 @@
           name:
             - zsh
             - tmux
+            - g++
 
     - name: snap install nvim --classic
       community.general.snap:
@@ -28,8 +28,7 @@
     - name: symlink configs
       ansible.builtin.file:
          src: "{{ nvimConfigSrc }}"
-         dest: "{{ nvimConfigDest }}"
+         dest: "{{ testDir }}"
          state: link
-         owner: root
-         group: root
          force: yes
+         owner: zyr
