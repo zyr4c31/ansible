@@ -31,4 +31,4 @@
          dest: "{{ testDir }}"
          state: link
          force: yes
-         owner: zyr
+         owner: root
