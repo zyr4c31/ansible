@@ -5,13 +5,15 @@
 
   vars: 
     homeDir: "{{ lookup('env', 'HOME') }}"
-    nvimConfigSrc: "{{ lookup('env', 'PWD') }}/files/nvim"
+    localPWD: "{{ lookup('env', 'PWD') }}"
+    nvimConfigSrc: "{{ localPWD }}/.dotfiles/nvim"
     nvimConfigDest: "{{ homeDir }}/.config/nvim"
 
   tasks:
 
     - name: Print present working directory
       debug:
+        var: localPWD
 
     - name: apt update
       apt:
@@ -28,6 +30,12 @@
       community.general.snap:
         name: 'nvim'
         classic: yes
+
+    - name: clone dotfiles
+      git:
+        repo: 'https://www.github.com/zyr4c31/.dotfiles'
+        dest: .dotfiles
+        force: true
 
     - name: symlink configs
       file:
