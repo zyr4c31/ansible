@@ -4,17 +4,14 @@
   become: true
 
   vars: 
-    test: ansible_facts
-    homeDir: "/home/zyr"
-    testDir: "{{ homeDir }}/.config/nvim"
-    nvimConfigSrc: "/home/zyr/personal/ansible/files/nvim"
-    nvimConfigDest: "/home/zyr/.config/nvim"
+    homeDir: "{{ lookup('env', 'HOME') }}"
+    nvimConfigSrc: "{{ lookup('env', 'PWD' }}/files/nvim"
+    nvimConfigDest: "{{ homeDir }}/.config/nvim"
 
   tasks:
 
-    - name: debug
-      ansible.builtin.debug: 
-      var: ansible_collections
+    - name: Print present working directory
+      debug:
 
     - name: apt update
       apt:
@@ -33,9 +30,9 @@
         classic: yes
 
     - name: symlink configs
-      ansible.builtin.file:
+      file:
          src: "{{ nvimConfigSrc }}"
-         dest: "{{ testDir }}"
+         dest: "{{ nvimConfigDest }}"
          state: link
          force: yes
          owner: root
