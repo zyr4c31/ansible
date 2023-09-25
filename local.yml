@@ -6,7 +6,7 @@
   vars: 
     homeDir: "{{ lookup('env', 'HOME') }}"
     localPWD: "{{ lookup('env', 'PWD') }}"
-    nvimConfigSrc: "{{ localPWD }}/.dotfiles/nvim"
+    nvimConfigSrc: "{{ localPWD }}/files/nvim"
     nvimConfigDest: "{{ homeDir }}/.config/nvim"
 
   tasks:
@@ -33,8 +33,8 @@
 
     - name: clone dotfiles
       git:
-        repo: 'https://www.github.com/zyr4c31/.dotfiles'
-        dest: .dotfiles
+        repo: 'https://www.github.com/zyr4c31/ansible'
+        dest: ansible
         force: true
 
     - name: symlink configs
