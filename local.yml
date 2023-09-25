@@ -5,7 +5,7 @@
 
   vars: 
     homeDir: "{{ lookup('env', 'HOME') }}"
-    nvimConfigSrc: "{{ lookup('env', 'PWD' }}/files/nvim"
+    nvimConfigSrc: "{{ lookup('env', 'PWD') }}/files/nvim"
     nvimConfigDest: "{{ homeDir }}/.config/nvim"
 
   tasks:
