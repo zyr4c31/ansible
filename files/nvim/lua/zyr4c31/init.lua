@@ -1,5 +1,6 @@
 require("zyr4c31.set")
 require("zyr4c31.remap")
+require("zyr4c31.packer")
 
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
