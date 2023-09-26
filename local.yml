@@ -3,7 +3,7 @@
   connection: local
   become: true
 
-  vars: 
+  vars:
     homeDir: "{{ lookup('env', 'HOME') }}"
     nvimConfigDest: "{{ homeDir }}/.config/nvim"
     localPWD: "{{ lookup('env', 'PWD') }}"
@@ -35,5 +35,6 @@
       file:
         src: "{{ nvimConfigSrc }}"
         dest: "{{ nvimConfigDest }}"
+        link: hard
         force: true
 

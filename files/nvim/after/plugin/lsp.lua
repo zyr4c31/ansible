@@ -41,8 +41,6 @@ end)
 -- with the ones you have installed in your system
 ---
 
-lsp.setup()
-
 vim.diagnostic.config({
     virtual_text = true
 })
