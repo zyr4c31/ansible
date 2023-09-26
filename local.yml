@@ -31,17 +31,8 @@
         name: 'nvim'
         classic: yes
 
-    - name: clone dotfiles
-      git:
-        repo: 'https://www.github.com/zyr4c31/ansible'
-        dest: ansible
-        force: true
-
     - name: symlink configs
       file:
-         src: "{{ nvimConfigSrc }}"
-         dest: "{{ nvimConfigDest }}"
-         state: link
-         force: yes
-         owner: root
+        src: files/nvim
+        dest: "{{ nvimConfigDest }}"
 
