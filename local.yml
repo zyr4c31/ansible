@@ -5,15 +5,15 @@
 
   vars: 
     homeDir: "{{ lookup('env', 'HOME') }}"
-    localPWD: "{{ lookup('env', 'PWD') }}"
-    nvimConfigSrc: "{{ localPWD }}/files/nvim"
     nvimConfigDest: "{{ homeDir }}/.config/nvim"
+    localPWD: "{{ lookup('env', 'PWD') }}"
+    nvimConfigSrc: "{{ homeDir }}/.ansible/pull/{{ ansible_hostname }}./files/nvim"
 
   tasks:
 
     - name: Print present working directory
       debug:
-        var: localPWD
+        var: nvimConfigSrc
 
     - name: apt update
       apt:
@@ -27,12 +27,13 @@
             - g++
 
     - name: snap install nvim --classic
-      community.general.snap:
+      snap:
         name: 'nvim'
         classic: yes
 
     - name: symlink configs
       file:
-        src: files/nvim
+        src: "{{ nvimConfigSrc }}"
         dest: "{{ nvimConfigDest }}"
+        force: true
 
