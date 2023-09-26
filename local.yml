@@ -35,6 +35,6 @@
       file:
         src: "{{ nvimConfigSrc }}"
         dest: "{{ nvimConfigDest }}"
-        link: hard
+        state: link
         force: true
 
