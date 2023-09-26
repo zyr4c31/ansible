@@ -1,6 +1,5 @@
 local lsp_zero = require('lsp-zero')
 
-lsp.preset("recommended")
 
 lsp.nvim_workspace()
 
@@ -40,6 +39,8 @@ end)
 -- Replace these language servers
 -- with the ones you have installed in your system
 ---
+
+lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true
